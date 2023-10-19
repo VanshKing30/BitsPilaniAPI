@@ -4,10 +4,14 @@ const router = express.Router();
 
 
 
-const {signup , login} = require("../controllers/Auth");
+const authController = require("../controllers/Auth");
+const studentController = require('../controllers/studentController');
 
-router.post("/signup" , signup);
-router.post("/login" ,login);
+router.post("/signup" , authController.signup);
+router.post("/login" ,  authController.login);
+router.get('/:id/', studentController.viewStudentProfile);
+
+
 
 
 
