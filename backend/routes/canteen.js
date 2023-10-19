@@ -4,25 +4,25 @@ const router = express.Router();
 // Import canteen controller functions
 const canteenController = require('../controllers/canteenController');
 
-// Route for the canteen dashboard
+// Route for the canteen dashboard of a specific canteen
 router.get('/:id', canteenController.getCanteenDashboard);
 
-// Route to add breakfast dish for a specific canteen
-router.post('/:id/add_breakfast_dish', canteenController.addBreakfastDish);
+// Route to add a breakfast dish for a specific canteen
+router.post('/:id/breakfast/add', canteenController.addBreakfastDish);
 
-// Route to add lunch dish for a specific canteen
-router.post('/:id/add_lunch_dish', canteenController.addLunchDish);
+// Route to remove a breakfast dish for a specific canteen
+router.delete('/:id/breakfast/remove', canteenController.removeBreakfastDish);
 
-// Route to add dinner dish for a specific canteen
-router.post('/:id/add_dinner_dish', canteenController.addDinnerDish);
+// Route to add a lunch dish for a specific canteen
+router.post('/:id/lunch/add', canteenController.addLunchDish);
 
-// Route to remove breakfast dish for a specific canteen
-router.delete('/:id/remove_breakfast_dish', canteenController.removeBreakfastDish);
+// Route to remove a lunch dish for a specific canteen
+router.delete('/:id/lunch/remove', canteenController.removeLunchDish);
 
-// Route to remove lunch dish for a specific canteen
-router.delete('/:id/remove_lunch_dish', canteenController.removeLunchDish);
+// Route to add a dinner dish for a specific canteen
+router.post('/:id/dinner/add', canteenController.addDinnerDish);
 
-// Route to remove dinner dish for a specific canteen
-router.delete('/:id/remove_dinner_dish', canteenController.removeDinnerDish);
+// Route to remove a dinner dish for a specific canteen
+router.delete('/:id/dinner/remove', canteenController.removeDinnerDish);
 
 module.exports = router;
