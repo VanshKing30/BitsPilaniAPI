@@ -6,7 +6,7 @@ require("dotenv").config();
 
 exports.signup = async (req , res)=>{
     try{
-        const {name , email ,   collegeName , accountType , password} = req.body;
+        const {name , email ,   collegeName , accountType ,  password} = req.body;
         const existingUser = await User.findOne({email});
 
         if(existingUser){
@@ -29,7 +29,7 @@ exports.signup = async (req , res)=>{
         }
 
         const user = await User.create({
-            name , email , collegeName,accountType,password:hashedPassword
+            name , email , collegeName,accountType , password:hashedPassword
         });
 
         return res.status(200).json({

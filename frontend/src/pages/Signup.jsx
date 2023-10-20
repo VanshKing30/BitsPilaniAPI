@@ -9,7 +9,7 @@ function Signup() {
     name: "",
     email: "",
     collegeName: "",
-    accountType: "",
+    accountType : "",
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);

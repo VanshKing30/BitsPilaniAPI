@@ -16,8 +16,8 @@ app.use(express.json());
 
 const studentRoutes = require("./routes/student"); 
 const canteenRoutes = require("./routes/canteen");
-app.use("/canteen" , canteenRoutes);
-app.use("/student", studentRoutes);
+app.use("/api/v1" , canteenRoutes);
+app.use("/api/v1", studentRoutes);
 
 
 
