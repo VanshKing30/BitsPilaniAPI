@@ -49,22 +49,57 @@ const removeBreakfastDish = asyncHandler(async (req, res, next) => {
 
 // Controller function to add a lunch dish
 const addLunchDish = asyncHandler(async (req, res, next) => {
-  // Similar to addBreakfastDish
+  const canteenId = req.params.id;
+  const { dish } = req.body;
+
+  const existingDish = await Lunch.findOne({ canteenId, dish }).exec();
+
+  if (existingDish) {
+    return res.json({ message: 'Dish already added' });
+  }
+
+  const newDish = new Lunch({ canteenId, dish });
+  await newDish.save();
+
+  res.json({ message: 'Dish added successfully' });
 });
 
 // Controller function to remove a lunch dish
 const removeLunchDish = asyncHandler(async (req, res, next) => {
-  // Similar to removeBreakfastDish
+  const canteenId = req.params.id;
+  const { dish } = req.body;
+
+  await Lunch.deleteOne({ canteenId, dish }).exec();
+  res.json({ message: 'Dish removed successfully' });
+
 });
 
 // Controller function to add a dinner dish
 const addDinnerDish = asyncHandler(async (req, res, next) => {
-  // Similar to addBreakfastDish
+  const canteenId = req.params.id;
+  const { dish } = req.body;
+
+  const existingDish = await Dinner.findOne({ canteenId, dish }).exec();
+
+  if (existingDish) {
+    return res.json({ message: 'Dish already added' });
+  }
+
+  const newDish = new Dinner({ canteenId, dish });
+  await newDish.save();
+
+  res.json({ message: 'Dish added successfully' });
+
 });
 
 // Controller function to remove a dinner dish
 const removeDinnerDish = asyncHandler(async (req, res, next) => {
-  // Similar to removeBreakfastDish
+  const canteenId = req.params.id;
+  const { dish } = req.body;
+
+  await Dinner.deleteOne({ canteenId, dish }).exec();
+  res.json({ message: 'Dish removed successfully' });
+
 });
 
 module.exports = {
