@@ -14,8 +14,11 @@ app.use(express.json());
 
 //mounting routes
 
-const userRoutes = require("./routes/userRoutes"); 
-app.use("/api/v1" , userRoutes);
+const studentRoutes = require("./routes/student"); 
+const canteenRoutes = require("./routes/canteen");
+app.use("/canteen" , canteenRoutes);
+app.use("/student", studentRoutes);
+
 
 
 
