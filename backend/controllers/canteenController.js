@@ -7,9 +7,9 @@ const Dinner = require('../models/dinner');
 const getCanteenDashboard = asyncHandler(async (req, res, next) => {
   const canteenId = req.params.id;
 
-  const breakfastDishes = await Breakfast.find({ canteenId }).exec();
-  const lunchDishes = await Lunch.find({ canteenId }).exec();
-  const dinnerDishes = await Dinner.find({ canteenId }).exec();
+  const breakfastDishes = await Breakfast.find({ canteen: canteenId }).select('dishName').exec();
+  const lunchDishes = await Lunch.find({ canteen: canteenId }).select('dishName').exec();
+  const dinnerDishes = await Dinner.find({ canteen: canteenId }).select('dishName').exec();
 
   res.json({
     breakfast: breakfastDishes.length > 0 ? breakfastDishes : ['Not Added Yet'],
