@@ -6,7 +6,7 @@ console.log(
   
   // Get the database URL from the command line argument
   const userArgs = process.argv.slice(2);
-  const databaseURL = "mongodb+srv://vanshwaldeo360:AqkVZgaZQ9FPTis9@cluster0.qn4s7ht.mongodb.net/PilaniDatabase"
+  const databaseURL = process.env.DATABASE_URI;
   
   // Import the necessary Mongoose models
   const Canteen = require('./models/canteenLoginInfo');
