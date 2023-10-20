@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
+import axios from "axios";
+
 
 function Login() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    role: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -20,10 +21,38 @@ function Login() {
   }
 
   function submitHandler(event) {
+    
+    
     event.preventDefault();
-    toast.success(`Login Successful for ${formData.role}`);
-    console.log(formData);
-    navigate("/home");
+
+    const apiUrl = `${process.env.REACT_APP_BASE_URL}/login`;
+
+    axios.post(apiUrl , formData)
+    .then((response)=>{
+      
+
+      if(response.data.success === true){
+        if(response.data.user.accountType === "User"){
+            navigate('/contact');
+        }
+        else if(response.data.user.accountType === "Admin"){
+          navigate('/home');
+        }
+        else{
+          navigate('/');
+        }
+      }
+      
+
+
+      console.log("Response" , response.data);
+      toast.success("Logged in succesfully");
+      // navigate("/home");
+    })
+    .catch((error)=>{
+      console.error("Error:" , error);
+      toast.error("Failed logged in");
+    });
   }
 
   return (
@@ -81,20 +110,6 @@ function Login() {
             >
               {showPassword ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
             </span>
-          </div>
-
-          <div className="mb-4">
-              <select
-                required
-                name="role"
-                onChange={changeHandler}
-                value={formData.role}
-                className="mt-1 p-2 w-full border rounded-2xl"
-              >
-                <option value="" disabled selected hidden>Login as</option>
-                <option value="student">Student</option>
-                <option value="canteen">Canteen</option>
-              </select>
           </div>
 
           <button type="submit" className="w-full bg-indigo-600 py-2 rounded-2xl text-white font-semibold mb-2">

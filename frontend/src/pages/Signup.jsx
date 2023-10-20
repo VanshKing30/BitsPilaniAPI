@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
+import axios from "axios";
 
 function Signup() {
   const [formData, setFormData] = useState({
-    username: "",
+    name: "",
     email: "",
-    mobile: "",
+    collegeName: "",
+    accountType: "",
     password: "",
-    role: "", 
   });
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -23,9 +24,21 @@ function Signup() {
 
   function submitHandler(event) {
     event.preventDefault();
-    toast.success(`Account Created Successfully as ${formData.role}`);
-    console.log(formData);
-    navigate("/home");
+
+    const apiUrl = `${process.env.REACT_APP_BASE_URL}/signup`;
+
+    axios.post(apiUrl , formData)
+    .then((response)=>{
+      console.log("Response" , response.data);
+      toast.success("Account Created succesfully");
+      navigate("/home");
+    })
+    .catch((error)=>{
+      console.error("Error:" , error);
+      toast.error("Failed To craete account");
+    });
+
+    
   }
 
   return (
@@ -59,9 +72,9 @@ function Signup() {
               required
               className="w-full py-2 px-3 border border-gray-300 rounded-2xl"
               type="text"
-              placeholder="Username"
-              name="username"
-              value={formData.username}
+              placeholder="Name"
+              name="name"
+              value={formData.name}
               onChange={changeHandler}
             />
           </div>
@@ -82,12 +95,26 @@ function Signup() {
             <input
               required
               className="w-full py-2 px-3 border border-gray-300 rounded-2xl"
-              type="tel"
-              placeholder="Mobile"
-              name="mobile"
-              value={formData.mobile}
+              type="text"
+              placeholder="College Name"
+              name="collegeName"
+              value={formData.collegeName}
               onChange={changeHandler}
             />
+          </div>
+
+          <div className="mb-4">
+              <select
+                required
+                name="accountType"
+                onChange={changeHandler}
+                value={formData.accountType}
+                className="mt-1 p-2 w-full border rounded-2xl"
+              >
+                <option value="" disabled selected hidden>Login as</option>
+                <option value="User">User</option>
+                <option value="Admin">Admin</option>
+              </select>
           </div>
 
           <div className="relative mb-4">
@@ -108,19 +135,6 @@ function Signup() {
             </span>
           </div>
 
-          <div className="mb-4">
-              <select
-                required
-                name="role"
-                onChange={changeHandler}
-                value={formData.role}
-                className="mt-1 p-2 w-full border rounded-2xl"
-              >
-                <option value="" disabled selected hidden>Login as</option>
-                <option value="student">Student</option>
-                <option value="canteen">Canteen</option>
-              </select>
-          </div>
 
           <button type="submit" className="w-full bg-indigo-600 py-2 rounded-2xl text-white font-semibold mb-2">
             Signup

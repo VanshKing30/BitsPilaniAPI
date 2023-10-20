@@ -3,9 +3,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import logo from "../assets/logo.png";
 import Navbar from "../components/Navbar";
+import CanteenList from "../components/CanteenList";
 
 function Home() {
   const [meals, setMeals] = useState([]);
@@ -34,9 +35,46 @@ function Home() {
 
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className=" min-h-screen">
       <Navbar />
-      <div className="container mx-auto py-8">
+      <div className="text-center">
+        <CanteenList />
+      </div>
+    </div>
+      
+  );
+}
+
+export default Home;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/* <div className="container mx-auto py-8">
         <h2 className="text-2xl font-bold mb-4">Today's Meal</h2>
         {selectedMeal ? (
           <div className="bg-white p-6 rounded shadow-md">
@@ -84,12 +122,7 @@ function Home() {
       )}
 
       
-    </div>
-      
-  );
-}
-
-export default Home;
+    </div> */}
 
 
 
