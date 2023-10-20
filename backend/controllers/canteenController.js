@@ -1,7 +1,7 @@
 const asyncHandler = require('express-async-handler');
-const Breakfast = require('../models/breakfastModel');
-const Lunch = require('../models/lunchModel');
-const Dinner = require('../models/dinnerModel');
+const Breakfast = require('../models/breakfast');
+const Lunch = require('../models/lunch');
+const Dinner = require('../models/dinner');
 
 // Controller function to get the canteen's dashboard
 const getCanteenDashboard = asyncHandler(async (req, res, next) => {
