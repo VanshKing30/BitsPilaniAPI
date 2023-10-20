@@ -23,13 +23,13 @@ const addBreakfastDish = asyncHandler(async (req, res, next) => {
   const canteenId = req.params.id;
   const { dish } = req.body;
 
-  const existingDish = await Breakfast.findOne({ canteenId, dish }).exec();
+  const existingDish = await Breakfast.findOne({ canteen: canteenId, dish }).exec();
 
   if (existingDish) {
     return res.json({ message: 'Dish already added' });
   }
 
-  const newDish = new Breakfast({ canteenId, dish });
+  const newDish = new Breakfast({ canteen: canteenId, dish });
   await newDish.save();
 
   res.json({ message: 'Dish added successfully' });
@@ -40,7 +40,7 @@ const removeBreakfastDish = asyncHandler(async (req, res, next) => {
   const canteenId = req.params.id;
   const { dish } = req.body;
 
-  await Breakfast.deleteOne({ canteenId, dish }).exec();
+  await Breakfast.deleteOne({ canteen: canteenId, dish }).exec();
   res.json({ message: 'Dish removed successfully' });
 });
 
@@ -52,13 +52,13 @@ const addLunchDish = asyncHandler(async (req, res, next) => {
   const canteenId = req.params.id;
   const { dish } = req.body;
 
-  const existingDish = await Lunch.findOne({ canteenId, dish }).exec();
+  const existingDish = await Lunch.findOne({ canteen: canteenId, dish }).exec();
 
   if (existingDish) {
     return res.json({ message: 'Dish already added' });
   }
 
-  const newDish = new Lunch({ canteenId, dish });
+  const newDish = new Lunch({ canteen: canteenId, dish });
   await newDish.save();
 
   res.json({ message: 'Dish added successfully' });
@@ -69,7 +69,7 @@ const removeLunchDish = asyncHandler(async (req, res, next) => {
   const canteenId = req.params.id;
   const { dish } = req.body;
 
-  await Lunch.deleteOne({ canteenId, dish }).exec();
+  await Lunch.deleteOne({ canteen: canteenId, dish }).exec();
   res.json({ message: 'Dish removed successfully' });
 
 });
@@ -79,13 +79,13 @@ const addDinnerDish = asyncHandler(async (req, res, next) => {
   const canteenId = req.params.id;
   const { dish } = req.body;
 
-  const existingDish = await Dinner.findOne({ canteenId, dish }).exec();
+  const existingDish = await Dinner.findOne({ canteen: canteenId, dish }).exec();
 
   if (existingDish) {
     return res.json({ message: 'Dish already added' });
   }
 
-  const newDish = new Dinner({ canteenId, dish });
+  const newDish = new Dinner({ canteen: canteenId, dish });
   await newDish.save();
 
   res.json({ message: 'Dish added successfully' });
@@ -97,7 +97,7 @@ const removeDinnerDish = asyncHandler(async (req, res, next) => {
   const canteenId = req.params.id;
   const { dish } = req.body;
 
-  await Dinner.deleteOne({ canteenId, dish }).exec();
+  await Dinner.deleteOne({ canteen: canteenId, dish }).exec();
   res.json({ message: 'Dish removed successfully' });
 
 });
